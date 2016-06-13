@@ -1,0 +1,57 @@
+
+<div class="page-header">
+	<h1>Detection Rules <small><%= @device.name %></small></h1>
+</div>
+
+Device Name: <%= @device.name %><br>
+
+<div>Enable The Site Difference Detection:
+  <% if(@device.site_difference_detect_enable == true)  %>
+		Yes<br>
+		<ul>
+			<li>Window Size: <%= @device.site_difference_detect_window %></li>
+			<li>Yield Difference Threshold: <%= @device.site_difference_detect_threshold %></li>
+		</ul>
+	<% else %>
+		No
+	<% end %>
+</div><!-- site difference div -->
+
+<div>Enable The Burst Failure Detection:
+	<% if(@device.continuously_failure_detect_enable == true)  %>
+		Yes<br>
+		<ul>
+			<li>Conimuously Failure Pieces Threshold: <%= @device.continuously_failure_detect_threshold %></li>
+		</ul>
+	<% else %>
+		No
+	<% end %>
+</div><!-- continuously failure div -->
+
+<div>Enable The Timing Variance Detection:
+	<% if(@device.time_variance_detect_enable == true)  %>
+		Yes<br>
+		<ul>
+			<li>Previous Sample Window Size: <%= @device.time_variance_detect_window_large %></li>
+			<li>Recent Sample Window Size: <%= @device.time_variance_detect_window_small %></li>
+			<li>Yield Difference Threshold: <%= @device.time_variance_detect_threshold %></li>
+		</ul>
+	<% else %>
+		No
+	<% end %>
+</div><!-- time variance div -->
+
+<div>Enable The Different Tester Variance Detection:
+<% if(@device.different_tester_variance_detect_enable == true)  %>
+	Yes<br>
+	<ul>
+		<li>Window Size: <%= @device.different_tester_variance_detect_window %></li>
+		<li>Yield Difference Threshold: <%= @device.different_tester_variance_detect_threshold %></li>
+	</ul>
+<% else %>
+	No
+<% end %>
+</div><!-- different tester variance div -->
+
+
+<p><%= link_to 'Back to index', :controller=>'devices', :action=>'index' %></p>

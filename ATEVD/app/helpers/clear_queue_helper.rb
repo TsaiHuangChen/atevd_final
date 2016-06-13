@@ -1,0 +1,2 @@
+module ClearQueueHelper
+end

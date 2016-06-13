@@ -1,0 +1,14 @@
+
+
+
+<%= form_for @device, :url => device_path(@device) do |f| %>
+	<div class="page-header">
+		<h1>Detection Rules <small>Edit</small></h1>
+	</div>
+	<%= render :partial => 'form', :locals => { :f => f } %>
+
+	<br>
+	<%= f.submit "Update" %>
+	<%= link_to 'back to device index', :controller => 'devices', :action => 'index' %>
+
+<% end %>

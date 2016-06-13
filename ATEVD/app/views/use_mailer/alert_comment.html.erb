@@ -1,0 +1,170 @@
+<div class="page-header">
+	<h1>Alerts <small><%= @alert_lot %> at <%= @alert_time %></small></h1>
+</div>
+
+<div>
+	<table border="1" width="60%">
+		<thead>
+		<tr>
+			<th>Lot</th>
+			<th>Device</th>
+			<th>Alert Type</th>
+			<th>Detected Serial</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr class="success">
+			<td><%= @alert_lot %></td>
+			<td><%= @alert_device %></td>
+			<% case (@alert_type) %>
+			<% when 1 %>
+				<td>SITE DIFFERENCE</td>
+			<% when 2 %>
+				<td>CONTINUOUSLY FAILURE</td>
+			<% when 3 %>
+				<td>TIME VARIANCE</td>
+			<% else %>
+				<td>DIFFERENT ATE VARIANCE</td>
+			<% end %>
+			<td><%= @detected_serial %></td>
+
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<% case (@alert_type) %>
+<% when 1 %>
+	<div>
+		<table border="1" width="60%">
+			<thead>
+			<tr>
+				<th>Max Site</th>
+				<th>Max Yield</th>
+				<th>Min Site</th>
+				<th>Min Yield</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="success">
+				<td><%= @max_element %></td>
+				<td><%= @max_yield %></td>
+				<td><%= @min_element %></td>
+				<td><%= @min_yield %></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<table border="1" width="60%">
+			<thead>
+			<tr>
+				<th>Yield Gap</th>
+				<th>Detect Threshold</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="success">
+				<td><%= @max_yield - @min_yield %></td>
+				<td><%= @alert_threshold %></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+<% when 2 %>
+	<div>
+		<table border="1" width="60%">
+			<thead>
+			<tr>
+				<th>Fail Bin</th>
+				<th>Continuous Fail Count(pcs)</th>
+				<th>Threshold(pcs)</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="success">
+				<td><%= @continuously_fail_bin %></td>
+				<td><%= @continuously_fail_number %></td>
+				<td><%= @alert_threshold %></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+<% when 3 %>
+	<div>
+		<table border="1" width="60%">
+			<thead>
+			<tr>
+				<th>Region 1 Size</th>
+				<th>Region 1 Yield</th>
+				<th>Region 2 Size</th>
+				<th>Region 2 Yield</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="success">
+				<td><%= @window_large %></td>
+				<td><%= @region_1_yield %></td>
+				<td><%= @window_small %></td>
+				<td><%= @region_2_yield %></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<table border="1" width="60%">
+			<thead>
+			<tr>
+				<th>Yield Gap</th>
+				<th>Detect Threshold</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="success">
+				<td><%= (@region_1_yield - @region_2_yield).abs %></td>
+				<td><%= @alert_threshold %></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+<% else %>
+	<div>
+		<table border="1" width="60%">
+			<thead>
+			<tr>
+				<th>Max ATE</th>
+				<th>Max Yield</th>
+				<th>Min ATE</th>
+				<th>Min Yield</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="success">
+				<td><%= @max_element %></td>
+				<td><%= @max_yield %></td>
+				<td><%= @min_element %></td>
+				<td><%= @min_yield %></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<table border="1" width="60%">
+			<thead>
+			<tr>
+				<th>Yield Gap</th>
+				<th>Detect Threshold</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="success">
+				<td><%= @max_yield - @min_yield %></td>
+				<td><%= @alert_threshold %></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+<% end %>

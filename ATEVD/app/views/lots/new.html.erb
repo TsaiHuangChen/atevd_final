@@ -1,0 +1,34 @@
+<%= form_for @lot, :url => lots_path, :html => { :method => :post } do |f| %>
+
+	<div class="page-header">
+		<h1>Lot Parameter <small>New</small></h1>
+	</div>
+
+	<div><h4>Basic Parameters</h4></div>
+	<ul>
+		<li><%= f.label "Lot Name:" %>	<%= f.text_field :name %><br></li>
+		<li><%= f.label "Tester Name:" %>	<%= f.text_field :tester %><br></li>
+
+		<li><%= f.label "Device Name:" %>	<%= f.collection_select :device_id, Device.all, :id, :name %><br></li>
+		<li><%= f.label "Total Device Count:" %>
+			<%= f.number_field :total_device_count, min: 0, step: 1 %></li>
+		<li><%= f.label "Site Number:" %>
+			<%= f.number_field :site_number, min: 0, max: 100, step: 1 %></li>
+		<li><%= f.label "Generate Mode:" %>
+			<%= f.select :generate_mode, [['Normal', 1], ['Time Vairance', 2], ['Site Difference', 3], ['Continuously Fail', 4]] %></li>
+	</ul>
+
+
+	<% if @lot.errors.any? %>
+		<ul>
+			<% @lot.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	<% end %>
+
+	<br>
+	<%= f.submit "Next" %>
+	<%= link_to 'back to lot index', :controller => 'lots', :action => 'index' %>
+
+<% end %>

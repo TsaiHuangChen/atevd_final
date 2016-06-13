@@ -1,0 +1,55 @@
+
+
+<%= f.label :name, "Device Name" %>
+<%= f.text_field :name %><br>
+
+<%= f.label :site_difference_detect_enable do %>
+	<%= f.check_box :site_difference_detect_enable %>
+	Enable The Site Difference Detection.
+<% end %>
+<ul>
+	<li><%= f.label "Window Size" %><%= f.number_field :site_difference_detect_window, :class => 'text_field', min: 0, step: 1 %></li>
+	<li><%= f.label "Yield Difference Threshold" %>
+		<%= f.number_field :site_difference_detect_threshold, :class => 'text_field', min: 0.0, max: 100.0, step: 0.01 %></li>
+</ul>
+
+<%= f.label :continuously_failure_detect_enable do %>
+	<%= f.check_box :continuously_failure_detect_enable %>
+	Enable The Continuously Failure Detection.
+<% end %>
+<ul>
+	<li><%= f.label "Continuously Fail Pieces Threshold" %><%= f.number_field :continuously_failure_detect_threshold, min: 0, step: 1 %></li>
+</ul>
+
+<%= f.label :time_variance_detect_enable do %>
+	<%= f.check_box :time_variance_detect_enable  %>
+	Enable The Time Variance Detection.
+<% end %>
+<ul>
+	<li><%= f.label "Window Size(Large)" %>
+		<%= f.number_field :time_variance_detect_window_large, min: 0, step: 1 %></li>
+	<li><%= f.label "Window Size(Small)" %>
+		<%= f.number_field :time_variance_detect_window_small, min: 0, step: 1 %></li>
+	<li><%= f.label :time_variance_detect_threshold, "Yield Difference Threshold" %>
+		<%= f.number_field :time_variance_detect_threshold, :class => 'text_field', min: 0.0, max: 100.0, step: 0.01 %></li>
+</ul>
+
+
+<%= f.label :different_tester_variance_detect_enable do %>
+	<%= f.check_box :different_tester_variance_detect_enable  %>
+	Enable The Different Testers Variance Detection.
+<% end %>
+<ul>
+	<li><%= f.label "Window Size" %>
+		<%= f.number_field :different_tester_variance_detect_window, min: 0, step: 1 %></li>
+	<li><%= f.label :different_tester_variance_detect_threshold, "Yield Difference Threshold" %>
+		<%= f.number_field :different_tester_variance_detect_threshold, :class => 'text_field', min: 0.0, max: 100.0, step: 0.01 %></li>
+</ul>
+
+<% if @device.errors.any? %>
+	<ul>
+		<% @device.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>

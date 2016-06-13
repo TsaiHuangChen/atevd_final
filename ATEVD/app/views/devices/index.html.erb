@@ -1,0 +1,14 @@
+
+<h1>Devices Index</h1>
+<%= paginate @devices %>
+<ul class="list-group">
+	<% @devices.each do |device| %>
+		<li class="list-group-item">
+			<%= device.name %>
+			<%= link_to("Show", device_path(device), class: "btn btn-default btn-xs") %>
+			<%= link_to("Edit", edit_device_path(device), class: "btn btn-default btn-xs")%>
+			<%= link_to("Delete", device_path(device), class: "btn btn-default btn-xs", :method => :delete, data: {confirm: "Are you sure?"} ) %>
+		</li>
+	<% end %>
+</ul>
+<%= link_to 'New Device', :controller => 'devices', :action => 'new' %>

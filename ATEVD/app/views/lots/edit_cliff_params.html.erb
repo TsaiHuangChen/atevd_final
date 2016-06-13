@@ -1,0 +1,32 @@
+
+
+	<div class="page-header">
+		<h1>Cliff Mode Rules <small><%= @lot.name %></small></h1>
+	</div>
+
+	<% i = 0 %>
+	<%= form_for @lot, :url => { :controller => 'lots', :action => 'update_cliff_params' } do |f| %>
+	<div><h4>Cliff Generation Parameters</h4></div>
+	<ul>
+		<li><%= f.label "Cliff:" %>
+			<%= f.number_field :cliff_number, :class => 'text_field', min: 0, max: @lot.total_device_count, step: 1 %></li>
+		<li><%= f.label "First Region Yield:" %>
+			<%= f.number_field :first_region_yield, :class => 'text_field', min: 0.0, max: 100.0, step: 0.01 %></li>
+		<li><%= f.label "Second Region Yield:" %>
+			<%= f.number_field :second_region_yield, :class => 'text_field', min: 0.0, max: 100.0, step: 0.01 %></li>
+	</ul>
+	<%= f.fields_for :sites do |ss| %>
+		<%= ss.label :site_enable do %>
+			<%= ss.check_box :site_enable %>
+			Site <%= i %> Enable
+
+			<% i = i+1 %>
+		<% end %>
+		<br>
+	<% end %>
+
+	<br>
+	<%= f.submit "Submit" %>
+	<%= link_to 'back to lot index', :controller => 'lots', :action => 'index' %>
+
+<% end %>

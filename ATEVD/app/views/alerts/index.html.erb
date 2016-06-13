@@ -1,0 +1,54 @@
+<div class="page-header">
+	<h1>Alert List</h1>
+</div>
+
+
+<%= paginate @alerts %>
+<div>
+	<table class="table table-condensed table-bordered">
+		<thead>
+		<tr>
+			<th>Lot</th>
+			<th>Device</th>
+			<th>Alert Type</th>
+			<th>Alert Time</th>
+			<th>fixed</th>
+			<th>fixed time</th>
+			<th>Detail</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		<% @alerts.each do |alert| %>
+			<% if(alert.fixed == true) %>
+				<tr class="success">
+			<% else %>
+				<tr class="danger">
+			<% end %>
+				<td><%= "#{alert.lot.name}" %></td>
+				<td><%= "#{alert.lot.device.name}" %></td>
+				<% if(alert.alerts_kind == 1) %>
+					<td><%= "SITE DIFFERENCE" %></td>
+				<% elsif(alert.alerts_kind == 2) %>
+					<td><%= "CONTINUOUSLY FAILURE" %></td>
+				<% elsif(alert.alerts_kind == 3) %>
+					<td><%= "TIME VARIANCE" %></td>
+				<% else %>
+					<td><%= "DIFF ATE VARIANCE" %></td>
+				<% end %>
+
+				<td><%= "#{alert.created_at}" %></td>
+				<% if(alert.fixed == false)%>
+					<td><%= "NO" %></td>
+					<td><%= "N/A" %></td>
+				<% else %>
+					<td><%= "YES" %></td>
+					<td><%= "#{alert.updated_at}" %></td>
+				<% end %>
+				<td><%= link_to "Detail", alert_path(alert)%></td>
+
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,28 @@
+
+
+	<div class="page-header">
+		<h1>Normal Mode Rules <small><%= @lot.name %></small></h1>
+	</div>
+	<% i = 0 %>
+	<%= form_for @lot, :url => { :controller => 'lots', :action => 'update_normal_params' } do |f| %>
+	<div><h4>Normal Generation Parameters</h4></div>
+	<ul>
+		<li><%= f.label "Yield:" %>
+			<%= f.number_field :basic_yield, :class => 'text_field', min: 0.0, max: 100.0, step: 0.01 %></li>
+
+		<%= f.fields_for :sites do |ss| %>
+			<%= ss.label :site_enable do %>
+				<%= ss.check_box :site_enable %>
+				Site <%= i %> Enable
+
+				<% i = i+1 %>
+			<% end %>
+			<br>
+		<% end %>
+	</ul>
+
+	<br>
+	<%= f.submit "Submit" %>
+	<%= link_to 'back to lot index', :controller => 'lots', :action => 'index' %>
+
+<% end %>

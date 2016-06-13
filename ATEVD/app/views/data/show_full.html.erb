@@ -1,0 +1,45 @@
+<div class="page-header">
+	<h1>Testing Data <small><%= @lot.name %></small></h1>
+</div>
+
+
+<div>
+	<%= link_to "Last 100 Pcs Data", :controller => 'data', :action => 'show' %><br>
+	<div class="pull-right inline">
+		Yield :<%= @yield%> %
+	</div>
+</div>
+<div>
+	<div class="pull-left inline">
+		<%= paginate @data %>
+	</div>
+</div>
+		<table class="table table-condensed table-bordered">
+			<thead>
+				<tr>
+					<th>Lot</th>
+					<th>Serial</th>
+					<th>Site</th>
+					<th>Bin</th>
+					<th>Created at</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @data.each do |data| %>
+					<% if(data.bin == 1) %>
+						<tr class="success">
+					<% else %>
+						<tr class="danger">
+					<% end %>
+							<td><%= "#{@lot.name}" %></td>
+							<td><%= "#{data.serial}" %></td>
+							<td><%= "#{data.site}" %></td>
+							<td><%= "#{data.bin}" %></td>
+							<td><%= "#{data.created_at}"%></td>
+						</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+<p><%= link_to 'Back to index', :controller => 'data', :action => 'index' %></p>

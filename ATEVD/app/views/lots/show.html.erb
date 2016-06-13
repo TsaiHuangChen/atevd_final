@@ -1,0 +1,65 @@
+
+<div class="page-header">
+	<h1>Lot Parameters <small><%= @lot.name %></small></h1>
+</div>
+
+<div>
+	<h4>Basic Parameters</h4>
+	<ul>
+		<li>Lot Name: <%= @lot.name %></li>
+		<li>Tester Name: <%= @lot.tester %></li>
+		<li>Device Name: <%= @lot.device.name %></li>
+		<li>Total Device Count: <%= @lot.total_device_count %></li>
+		<li>Site Number: <%= @lot.site_number %></li>
+		<li>Generate Mode:
+			<% if(@lot.generate_mode == 1) %>	Normal
+			<% elsif(@lot.generate_mode == 2) %>	Cliff
+			<% else %>	Site Difference
+			<% end %>
+		</li>
+	</ul>
+</div>
+
+
+<% if(@lot.generate_mode == 1) %>
+	<h4>Normal Generation Parameter</h4>
+	<ul>
+		<li>Generate Yield:  <%= @lot.basic_yield %>%</li>
+	</ul>
+<% elsif(@lot.generate_mode == 2) %>
+	<h4>Time Variance Generation Parameter</h4>
+	<ul>
+		<li>Cliff number:	<%= @lot.cliff_number %></li>
+		<li>First region yield:	<%= @lot.first_region_yield %>%</li>
+		<li>Second region yield:	<%= @lot.second_region_yield %>%</li>
+	</ul>
+<% elsif(@lot.generate_mode == 4) %>
+	<h4>Continuously Fail Generation Parameter</h4>
+        <ul>
+                <li>Fail Starting Sreial:       <%= @lot.cliff_number %></li>
+                <li>First region yield: <%= @lot.first_region_yield %>%</li>
+                <li>Second region yield:        <%= @lot.second_region_yield %>%</li>
+        </ul>
+
+<% else %>
+	<h4>Site Difference Generation Parameter</h4>
+<% end %>
+
+<ul>
+	<% for @site in @sites do %>
+		<% if(@site.site_enable == true) %>
+			<li>Site <%= @site.site_serial %>:	Active,
+			<% if(@lot.generate_mode==1) %>
+					generate yield: <%= @lot.basic_yield %>%</li>
+			<% elsif((@lot.generate_mode==2)||(@lot.generate_mode==4)) %>
+			<% else %>
+					generate yield: <%= @site.site_yield %>%</li>
+			<% end %>
+		<% else %>
+			<li>Site <%= @site.site_serial %>:	Not Active.</li>
+		<% end %>
+	<% end %>
+</ul>
+
+
+<p><%= link_to 'Back to index', :controller => 'lots', :action => 'index' %></p>
